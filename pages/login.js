@@ -3,7 +3,7 @@ import { SyncOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -11,9 +11,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { state, dispatch } = useContext(Context);
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(Context);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (user !== null) router.push("/");
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

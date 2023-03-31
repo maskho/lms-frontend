@@ -1,7 +1,8 @@
 import { SyncOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -11,6 +12,17 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(Context);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user !== null) router.push("/");
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
