@@ -1,8 +1,9 @@
+import { Context } from "@/context";
 import { SyncOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -35,6 +36,10 @@ const Register = () => {
         password,
       });
       toast.success("Registration successful. Please login.");
+      setName("");
+      setUsername("");
+      setEmail("");
+      setPassword("");
       setLoading(false);
     } catch (error) {
       toast.error(error.response.data);

@@ -79,9 +79,15 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <p className="text-center p-3">
-          Not yet registered?
-          <Link href={"/register"}> Register</Link>
+        <p className="text-center pt-3">
+          Not yet registered? <Link href={"/register"}>Register</Link>
+        </p>
+
+        <p className="text-center">
+          Forgot password?{" "}
+          <Link href={"/forgot-password"} className="text-danger">
+            Reset
+          </Link>
         </p>
       </div>
     </>
