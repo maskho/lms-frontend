@@ -2,9 +2,11 @@ import { Menu } from "antd";
 import Link from "next/link";
 import {
   AppstoreOutlined,
+  BookOutlined,
   DashboardOutlined,
   LoginOutlined,
   LogoutOutlined,
+  TeamOutlined,
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -38,7 +40,7 @@ const TopNav = () => {
   };
 
   return (
-    <Menu mode="horizontal" selectedKeys={[current]}>
+    <Menu mode="horizontal" className="d-block mb-2" selectedKeys={[current]}>
       <Item
         key="/"
         icon={<AppstoreOutlined />}
@@ -46,6 +48,26 @@ const TopNav = () => {
       >
         <Link href="/">App</Link>
       </Item>
+
+      {user && user.role && user.role.includes("Provider") && (
+        <Item
+          key="/provider/course/create"
+          icon={<BookOutlined />}
+          onClick={(e) => setCurrent(e.key)}
+        >
+          <Link href="/provider/course/create">Create Course</Link>
+        </Item>
+      )}
+
+      {user && user.role && user.role.includes("Administrator") && (
+        <Item
+          key="/user/become-provider"
+          icon={<TeamOutlined />}
+          onClick={(e) => setCurrent(e.key)}
+        >
+          <Link href="/user/become-provider">Add Provider</Link>
+        </Item>
+      )}
 
       {user === null ? (
         <>
@@ -66,26 +88,29 @@ const TopNav = () => {
           </Item>
         </>
       ) : (
-        <SubMenu
-          icon={<UserOutlined />}
-          title={user && user.name}
-          className="float-end"
-        >
-          <ItemGroup>
-            <Item key="/user" icon={<DashboardOutlined />}>
-              <Link href="/user">Dashboard</Link>
-            </Item>
-
+        <div className="float-end">
+          {user && user.role && user.role.includes("Provider") && (
             <Item
-              key="/logout"
-              icon={<LogoutOutlined />}
-              onClick={logout}
-              className="float-end"
+              key="/provider"
+              icon={<TeamOutlined />}
+              onClick={(e) => setCurrent(e.key)}
             >
-              Logout
+              <Link href="/provider">Provider</Link>
             </Item>
-          </ItemGroup>
-        </SubMenu>
+          )}
+
+          <SubMenu icon={<UserOutlined />} title={user && user.name}>
+            <ItemGroup>
+              <Item key="/user" icon={<DashboardOutlined />}>
+                <Link href="/user">Dashboard</Link>
+              </Item>
+
+              <Item key="/logout" icon={<LogoutOutlined />} onClick={logout}>
+                Logout
+              </Item>
+            </ItemGroup>
+          </SubMenu>
+        </div>
       )}
     </Menu>
   );
