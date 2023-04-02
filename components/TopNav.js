@@ -88,7 +88,7 @@ const TopNav = () => {
           </Item>
         </>
       ) : (
-        <div className="float-end">
+        <div className="float-right">
           {user && user.role && user.role.includes("Provider") && (
             <Item
               key="/provider"
