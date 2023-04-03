@@ -2,7 +2,7 @@ import AddModuleForm from "@/components/forms/AddModuleForm";
 import ProviderRoute from "@/components/routes/ProviderRoute";
 import { CheckOutlined, EditOutlined, UploadOutlined } from "@ant-design/icons";
 import { Avatar, Button, List, Modal, Tooltip } from "antd";
-import Item from "antd/es/list/Item";
+import Item from "antd/lib/list/Item";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -123,7 +123,12 @@ const CourseView = () => {
                   </div>
                   <div className="d-flex pt-4">
                     <Tooltip title="Edit">
-                      <EditOutlined className="h5 pointer text-warning mr-4" />
+                      <EditOutlined
+                        onClick={() =>
+                          router.push(`/provider/course/edit/${slug}`)
+                        }
+                        className="h5 pointer text-warning mr-4"
+                      />
                     </Tooltip>
                     <Tooltip title="Publish">
                       <CheckOutlined className="h5 pointer text-danger" />
