@@ -1,9 +1,10 @@
 import CourseCreateForm from "@/components/forms/CourseCreateForm";
 import ProviderRoute from "@/components/routes/ProviderRoute";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import FileResizer from "react-image-file-resizer";
-import toast from "react-toastify";
+import { toast } from "react-toastify";
 
 const CourseCreate = () => {
   const [values, setValues] = useState({
@@ -18,6 +19,8 @@ const CourseCreate = () => {
   const [image, setImage] = useState({});
   const [preview, setPreview] = useState("");
   const [uploadButtonText, setUploadButtonText] = useState("Upload Image");
+
+  const router = useRouter();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -68,8 +71,19 @@ const CourseCreate = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const { data } = await axios.post("/api/course", {
+        ...values,
+        image,
+      });
+      toast("Great! Now you can start adding modules");
+      router.push("/provider");
+    } catch (error) {
+      toast(error.response.data);
+    }
   };
 
   return (
