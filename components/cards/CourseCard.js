@@ -3,7 +3,7 @@ import { Badge, Card } from "antd";
 import Link from "next/link";
 
 const CourseCard = ({ course }) => {
-  const { name, provider, price, image, slug, paid, category } = course;
+  const { name, provider, price, image, slug, paid, keyword } = course;
 
   return (
     <Link href={`/course/${slug}`}>
@@ -21,7 +21,7 @@ const CourseCard = ({ course }) => {
         <h2 className="font-weight-bold">{name}</h2>
         <p>by {provider.name}</p>
         <Badge
-          count={category}
+          count={keyword}
           style={{ backgroundColor: "blue" }}
           className="pb-2 mr-2"
         />

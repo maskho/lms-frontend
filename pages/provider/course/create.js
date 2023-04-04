@@ -13,7 +13,7 @@ const CourseCreate = () => {
     price: "50000",
     uploading: false,
     paid: true,
-    category: "",
+    keyword: "",
     loading: false,
   });
   const [image, setImage] = useState({});
@@ -44,7 +44,7 @@ const CourseCreate = () => {
           let { data } = await axios.post("/api/course/upload-image", {
             image: uri,
           });
-          console.log("Image uploaded", data);
+          console.log("Image uploaded", uri);
           setImage(data);
           setValues({ ...values, loading: false });
         } catch (error) {
@@ -105,8 +105,6 @@ const CourseCreate = () => {
           handleImageRemove={handleImageRemove}
         />
       </div>
-      <pre>{JSON.stringify(values, null, 4)}</pre>
-      <pre>{JSON.stringify(image, null, 4)}</pre>
     </ProviderRoute>
   );
 };

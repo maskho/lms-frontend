@@ -65,7 +65,7 @@ const UpdateModuleForm = ({
           <Switch
             className="float-right mt-2"
             disabled={uploading}
-            defaultChecked={current.free_preview}
+            checked={current.free_preview}
             name="free_preview"
             onChange={(v) => setCurrent({ ...current, free_preview: v })}
           />
