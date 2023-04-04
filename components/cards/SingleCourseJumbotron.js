@@ -1,8 +1,6 @@
 import { rupiah } from "@/utils/currency";
 import { LoadingOutlined, SafetyOutlined } from "@ant-design/icons";
 import { Badge, Button } from "antd";
-import axios from "axios";
-import { useState } from "react";
 import ReactPlayer from "react-player";
 
 const SingleCourseJumbotron = ({

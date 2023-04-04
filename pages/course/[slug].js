@@ -6,11 +6,8 @@ const SingleCourseJumbotron = dynamic(
 // import SingleCourseJumbotron from "@/components/cards/SingleCourseJumbotron";
 import SingleCourseModule from "@/components/cards/SingleCourseModule";
 import PreviewModal from "@/components/modal/PreviewModal";
-import { rupiah } from "@/utils/currency";
-import { Badge } from "antd";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import { Context } from "@/context";
 import { toast } from "react-toastify";
 

@@ -8,6 +8,8 @@ import {
   PlayCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  CheckCircleFilled,
+  MinusCircleFilled,
 } from "@ant-design/icons";
 import StudentRoute from "@/components/routes/StudentRoute";
 
@@ -18,6 +20,8 @@ const SingleCourse = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState({ modules: [] });
+  const [completedModules, setCompletedModules] = useState([]);
+  const [updateState, setUpdateState] = useState(false);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -26,9 +30,51 @@ const SingleCourse = () => {
     if (slug) loadCourse();
   }, [slug]);
 
+  useEffect(() => {
+    if (course) loadCompletedModules();
+  }, [course]);
+
   const loadCourse = async () => {
     const { data } = await axios.get(`/api/user/course/${slug}`);
     setCourse(data);
+  };
+
+  const loadCompletedModules = async () => {
+    const { data } = await axios.post(`/api/list-completed`, {
+      courseId: course._id,
+    });
+    console.log("COMPLETED MODULES => ", data);
+    setCompletedModules(data);
+  };
+
+  const markCompleted = async () => {
+    const { data } = await axios.post(`/api/mark-completed`, {
+      courseId: course._id,
+      moduleId: course.modules[clicked]._id,
+    });
+    console.log(data);
+    setCompletedModules([...completedModules, course.modules[clicked]._id]);
+  };
+
+  const markIncompleted = async () => {
+    try {
+      const { data } = await axios.post(`/api/mark-incomplete`, {
+        courseId: course._id,
+        moduleId: course.modules[clicked]._id,
+      });
+      console.log(data);
+      const all = completedModules;
+      console.log("ALL => ", all);
+      const index = all.indexOf(course.modules[clicked]._id);
+      if (index > -1) {
+        all.splice(index, 1);
+        console.log("ALL WITHOUT REMOVED => ", all);
+        setCompletedModules(all);
+        setUpdateState(!updateState);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -54,6 +100,17 @@ const SingleCourse = () => {
                 icon={<Avatar>{index + 1}</Avatar>}
               >
                 {module.title.substring(0, 30)}
+                {completedModules.includes(module._id) ? (
+                  <CheckCircleFilled
+                    className="float-right text-primary ml-2"
+                    style={{ marginTop: "13px" }}
+                  />
+                ) : (
+                  <MinusCircleFilled
+                    className="float-right text-danger ml-2"
+                    style={{ marginTop: "13px" }}
+                  />
+                )}
               </Item>
             ))}
           </Menu>
@@ -62,6 +119,22 @@ const SingleCourse = () => {
         <div className="col">
           {clicked !== -1 ? (
             <>
+              <div className="col alert alert-primary square">
+                <b>{course.modules[clicked].title.substring(0, 30)}</b>
+                {completedModules.includes(course.modules[clicked]._id) ? (
+                  <span
+                    className="float-right pointer"
+                    onClick={markIncompleted}
+                  >
+                    Mark as incomplete
+                  </span>
+                ) : (
+                  <span className="float-right pointer" onClick={markCompleted}>
+                    Mark as completed
+                  </span>
+                )}
+              </div>
+
               {course.modules[clicked].video &&
                 course.modules[clicked].video.Location && (
                   <>
@@ -72,6 +145,7 @@ const SingleCourse = () => {
                         width="100%"
                         height="100%"
                         controls
+                        onEnded={() => markCompleted()}
                       />
                     </div>
                   </>

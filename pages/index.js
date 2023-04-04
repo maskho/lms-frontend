@@ -1,20 +1,14 @@
-import CourseCard from "@/components/cards/CourseCard";
+// import CourseCard from "@/components/cards/CourseCard";
+import dynamic from "next/dynamic";
+const CourseCard = dynamic(() => import("@/components/cards/CourseCard"), {
+  ssr: false,
+});
 import { Card } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Home = ({ courses }) => {
-  // const [courses, setCourses] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     const { data } = await axios.get("/api/courses");
-  //     setCourses(data);
-  //   };
-  //   fetchCourses();
-  // }, []);
-
   return (
     <>
       <div className="p-5 mb-4 bg-primary bg-gradient rounded-0">
