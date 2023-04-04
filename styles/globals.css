@@ -1,0 +1,13 @@
+.square {
+    border-radius: 0px;
+  }
+  
+  .jumbotron {
+    background-image: linear-gradient(to right, #3C3BEE, #19b9dd);
+    color: #fff;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
