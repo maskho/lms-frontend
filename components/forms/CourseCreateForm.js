@@ -61,7 +61,8 @@ const CourseCreateForm = ({
             {values.paid && (
               <div className="form-group">
                 <Select
-                  defaultValue={rupiah(500000)}
+                  placeholder="Set course price"
+                  defaultValue={500000}
                   style={{ width: "100%" }}
                   onChange={(v) => setValues({ ...values, price: v })}
                   tokenSeparators={[,]}
@@ -76,10 +77,10 @@ const CourseCreateForm = ({
           <div className="form-group">
             <input
               type="text"
-              name="category"
+              name="keyword"
               className="form-control"
-              placeholder="Category"
-              value={values.category}
+              placeholder="Keyword"
+              value={values.keyword}
               onChange={handleChange}
             />
           </div>

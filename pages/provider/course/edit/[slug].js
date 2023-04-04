@@ -17,7 +17,7 @@ const CourseEdit = () => {
     price: "50000",
     uploading: false,
     paid: true,
-    category: "",
+    keyword: "",
     loading: false,
     modules: [],
   });

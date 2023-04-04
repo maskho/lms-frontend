@@ -154,7 +154,7 @@ const CourseView = () => {
                       {course.modules && course.modules.length} Modules
                     </p>
                     <p style={{ marginTop: "-15px", fontSize: "10px" }}>
-                      {course.category}
+                      {course.keyword}
                     </p>
                   </div>
                   <div className="d-flex pt-4">

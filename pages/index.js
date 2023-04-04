@@ -4,16 +4,16 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [courses, setCourses] = useState([]);
+const Home = ({ courses }) => {
+  // const [courses, setCourses] = useState([]);
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const { data } = await axios.get("/api/courses");
-      setCourses(data);
-    };
-    fetchCourses();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //     const { data } = await axios.get("/api/courses");
+  //     setCourses(data);
+  //   };
+  //   fetchCourses();
+  // }, []);
 
   return (
     <>
@@ -33,4 +33,16 @@ export default function Home() {
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  const { data } = await axios.get(`${process.env.API}/courses`);
+
+  return {
+    props: {
+      courses: data,
+    },
+  };
 }
+
+export default Home;
