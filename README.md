@@ -2,7 +2,7 @@ This is the frontend code for Lerero Practical Test by S.A. Khobar
 
 ## Preview
 
-You can access the deployed site in this url: [http://localhost:3000](http://localhost:3000)
+You can access the deployed site in this url: [tbd.](tbd.)
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+This frontend was built with the following stack:
 
 - Next.js Framework
 - ReactJS
