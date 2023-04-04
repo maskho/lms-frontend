@@ -2,7 +2,7 @@ This is the _frontend code_ for Lerero Practical Test by S.A. Khobar
 
 ## Preview
 
-You can access the deployed site in this url: [https://vclock.com/timer/#countdown=04:00:00&date=2023-04-04T22:39:07](tbd.)
+You can access the deployed site in this url: [tbd.](https://vclock.com/timer/#countdown=04:00:00&date=2023-04-04T22:39:07)
 
 ## Getting Started
 
