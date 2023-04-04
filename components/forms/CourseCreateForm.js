@@ -1,13 +1,7 @@
+import { rupiah } from "@/utils/currency";
 import { Select, Button, Avatar, Badge } from "antd";
 
 const { Option } = Select;
-
-const rupiah = (number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-  }).format(number);
-};
 
 const CourseCreateForm = ({
   handleSubmit,

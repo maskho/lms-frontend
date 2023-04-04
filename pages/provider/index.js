@@ -1,6 +1,6 @@
 import ProviderRoute from "@/components/routes/ProviderRoute";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
+import { Avatar, Tooltip } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -48,9 +48,9 @@ const ProviderIndex = () => {
                     <p style={{ marginTop: "-10px" }}>
                       {course.modules.length} Modules
                     </p>
-                    {course.modules.length < 5 ? (
+                    {course.modules.length < 1 ? (
                       <p style={myStyle} className="text-warning">
-                        At least 5 modules are required to publish a course
+                        At least 1 modules are required to publish a course
                       </p>
                     ) : course.published ? (
                       <p style={myStyle} className="text-success">
@@ -64,13 +64,13 @@ const ProviderIndex = () => {
                   </div>
                   <div className="col-md-3 mt-3 text-center">
                     {course.published ? (
-                      <div>
+                      <Tooltip title="Published">
                         <CheckCircleOutlined className="h5 pointer text-success" />
-                      </div>
+                      </Tooltip>
                     ) : (
-                      <div>
+                      <Tooltip title="Unpublished">
                         <CloseCircleOutlined className="h5 pointer text-warning" />
-                      </div>
+                      </Tooltip>
                     )}
                   </div>
                 </div>
